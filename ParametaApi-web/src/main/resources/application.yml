@@ -1,0 +1,28 @@
+info:
+  app:
+    name: ParametaApi
+    version: 1.0
+
+spring:
+  profiles:
+    active: pro
+  application:
+    name: ${info.app.name}
+  jackson:
+    default-property-inclusion: non_null
+server:
+  port: 8095
+
+---
+spring:
+  profiles: dev
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}:%-30.30method:%-4.4line){cyan} %clr(%5p) %m%n%wEx"
+
+---
+spring:
+  profiles: pro
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}:%-30.30method:%-4.4line){cyan} %clr(%5p) %m%n%wEx"
