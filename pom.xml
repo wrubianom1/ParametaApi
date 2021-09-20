@@ -5,7 +5,7 @@
 
     <groupId>com.parameta.api</groupId>
     <artifactId>ParametaApi</artifactId>
-    <version>${revision}</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -58,6 +58,11 @@
             <version>2.3.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -85,5 +90,6 @@
         <module>ParametaApi-model</module>
         <module>ParametaApi-core</module>
         <module>ParametaApi-web</module>
+        <module>ParametaApi-integration</module>
     </modules>
 </project>

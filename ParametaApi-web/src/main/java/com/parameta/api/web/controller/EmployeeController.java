@@ -2,9 +2,9 @@ package com.parameta.api.web.controller;
 
 import com.parameta.api.dto.EmployeeDTO;
 import com.parameta.api.exception.ParametaAppException;
-import com.parameta.api.service.IEmployeeService;
-import com.parameta.api.web.dto.UserSessionDTO;
-import com.parameta.api.web.utils.ExceptionUtils;
+import com.parameta.api.web.constants.EmployeeConstants;
+import com.parameta.api.web.service.IIntegrationBridgeService;
+import com.parameta.api.web.utils.ErrorMessage;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -14,25 +14,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import java.io.Serializable;
 
 @Slf4j
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/employee/")
+@Validated
 public class EmployeeController implements Serializable {
 
-    private UserSessionDTO userSessionDTO;
-    private IEmployeeService iEmployeeService;
-    private ExceptionUtils exceptionUtils;
+    private IIntegrationBridgeService iIntegrationBridgeService;
 
     @Autowired
-    public EmployeeController(UserSessionDTO headerDTO, IEmployeeService iEmployeeService, ExceptionUtils exceptionUtils) {
-        this.userSessionDTO = headerDTO;
-        this.iEmployeeService = iEmployeeService;
-        this.exceptionUtils = exceptionUtils;
+    public EmployeeController(IIntegrationBridgeService iIntegrationBridgeService) {
+        this.iIntegrationBridgeService = iIntegrationBridgeService;
     }
 
 
@@ -44,18 +44,27 @@ public class EmployeeController implements Serializable {
             @ApiResponse(code = 404, message = "Not found"),
             @ApiResponse(code = 500, message = "Internal Error")}
     )
-    public ResponseEntity<Object> createEmployee(
-            @RequestBody @ApiParam(name = "employeeDTO", type = "EmployeeDTO", required = true) EmployeeDTO employeeDTO) {
+    public ResponseEntity<?> createEmployee(
+            @Valid @RequestBody @ApiParam(name = "employeeDTO", type = "EmployeeDTO", required = true) EmployeeDTO employeeDTO) {
         try {
-            this.iEmployeeService.createEmployee(employeeDTO);
-            return new ResponseEntity<>("Register Employee OK", HttpStatus.OK);
+            iIntegrationBridgeService.createEmployee(employeeDTO);
+            return new ResponseEntity<>("Register OK", HttpStatus.OK);
         } catch (ParametaAppException e) {
             log.error("Error createEmployee {} ", e);
-            return new ResponseEntity<>(this.exceptionUtils.extractErrorException(e, "Create an employee"), HttpStatus.resolve(e.getHttpStatusEx()));
+            ErrorMessage errorMessage = EmployeeConstants.extractErrorException(e, "Create Employee");
+            return new ResponseEntity<>(errorMessage.toString(), errorMessage.getHttpStatus());
         } catch (Exception e) {
             log.error("Error createEmployee {} ", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
+        log.error("Se presento un error al validar el formulatio {} ", e.getMessage());
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
 
 }

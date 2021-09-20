@@ -1,6 +1,6 @@
 info:
   app:
-    name: ParametaApi
+    name: ParametaWS
     version: 1.0
 
 spring:
@@ -13,16 +13,13 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/PlanDM
     username: postgres
-    password: admin
+    password : admin
 server:
-  port: 8095
+  port: 8078
 
-
-propertiesApi:
-  endpointEmployee:
-    create: "http://localhost:8078/ws"
-
-
+propertiesApp:
+  pathXsd : "employeeDescription.xsd"
+  urlNameSpace: "http://www.parameta.com/api/web/ws/dto"
 
 ---
 spring:

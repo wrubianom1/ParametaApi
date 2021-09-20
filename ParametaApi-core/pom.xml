@@ -5,7 +5,7 @@
     <parent>
         <artifactId>ParametaApi</artifactId>
         <groupId>com.parameta.api</groupId>
-        <version>${revision}</version>
+        <version>1.0.0</version>
     </parent>
     <artifactId>ParametaApi-core</artifactId>
     <packaging>jar</packaging>
@@ -22,7 +22,15 @@
         <dependency>
             <artifactId>ParametaApi-model</artifactId>
             <groupId>com.parameta.api</groupId>
-            <version>${revision}</version>
+            <version>1.0.0</version>
+        </dependency>
+
+
+
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
 
         <dependency>

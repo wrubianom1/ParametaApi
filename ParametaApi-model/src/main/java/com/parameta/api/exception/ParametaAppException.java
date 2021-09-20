@@ -24,6 +24,13 @@ public class ParametaAppException extends Exception {
         this.httpStatusEx = httpStatusEx;
     }
 
+    public ParametaAppException(int errorCodeEx, String msg, int httpStatusEx) {
+        super(msg);
+        this.errorCodeEx = errorCodeEx;
+        this.httpStatusEx = httpStatusEx;
+    }
+
+
     public int getHttpStatusEx() {
         return httpStatusEx;
     }

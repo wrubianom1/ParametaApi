@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.parameta.com/api/web/ws/dto"
+            elementFormDefault="qualified">
+
+
+    <xsd:element name="EmployeeRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="names" type="xsd:string"/>
+                <xsd:element name="lastName" type="xsd:string"/>
+                <xsd:element name="documentType" type="xsd:string"/>
+                <xsd:element name="documentNumber" type="xsd:string"/>
+                <xsd:element name="dateOfBirth" type="xsd:string"/>
+                <xsd:element name="hiringDate" type="xsd:string"/>
+                <xsd:element name="positionRoleType" type="xsd:string"/>
+                <xsd:element name="salary" type="xsd:double"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="EmployeeResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="result" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+
+</xsd:schema>

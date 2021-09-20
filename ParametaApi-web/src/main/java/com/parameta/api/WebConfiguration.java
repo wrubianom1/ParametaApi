@@ -3,16 +3,14 @@ package com.parameta.api;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Predicate;
-import com.parameta.api.web.dto.UserSessionDTO;
-import com.parameta.api.web.interceptor.JWTValidateInterceptor;
-import com.parameta.api.web.interceptor.UserInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -64,27 +62,6 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
-    @Bean(name = "UserSessionDTO")
-    @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public UserSessionDTO userBean() {
-        return new UserSessionDTO();
-    }
-
-    @Bean
-    public UserInterceptor userInterceptor() {
-        return new UserInterceptor(userBean());
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(userInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/swagger*/**", "springfox*/**", "/actuator*/**", "/");
-        registry.addInterceptor(jwtValidateInterceptor())
-                .addPathPatterns("/satellite/topsecret_split/**")
-                .excludePathPatterns("/swagger*/**", "springfox*/**", "/actuator*/**", "/");
-    }
-
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -109,11 +86,6 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
         converter.setObjectMapper(objectMapper);
         converters.add(converter);
         addDefaultHttpMessageConverters(converters);
-    }
-
-    @Bean
-    public JWTValidateInterceptor jwtValidateInterceptor() {
-        return new JWTValidateInterceptor(userBean());
     }
 
 }

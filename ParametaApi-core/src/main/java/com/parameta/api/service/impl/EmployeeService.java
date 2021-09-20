@@ -3,7 +3,9 @@ package com.parameta.api.service.impl;
 
 import com.parameta.api.dto.EmployeeDTO;
 import com.parameta.api.exception.ParametaAppException;
+import com.parameta.api.model.Employee;
 import com.parameta.api.service.IEmployeeService;
+import com.parameta.api.service.repository.EmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeService implements IEmployeeService {
 
+    private EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeeService() {
-
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     /**
@@ -26,7 +29,13 @@ public class EmployeeService implements IEmployeeService {
      */
     @Override
     public void createEmployee(EmployeeDTO employeeDTO) throws ParametaAppException {
-
+        try {
+            Employee employee = new Employee();
+            employee.setNames(employeeDTO.getNames());
+            this.employeeRepository.save(employee);
+        } catch (Exception e) {
+            System.out.println("Error" + e);
+        }
     }
 }
 
