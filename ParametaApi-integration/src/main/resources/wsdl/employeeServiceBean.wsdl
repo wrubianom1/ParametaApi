@@ -1,10 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.parameta.com/api/web/ws/dto"
-                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.parameta.com/api/web/ws/dto"
-                  targetNamespace="http://www.parameta.com/api/web/ws/dto">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.parameta.com/api/web/ws/dto" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.parameta.com/api/web/ws/dto" targetNamespace="http://www.parameta.com/api/web/ws/dto">
     <wsdl:types>
-        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-                    targetNamespace="http://www.parameta.com/api/web/ws/dto">
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.parameta.com/api/web/ws/dto">
 
 
             <xsd:element name="EmployeeRequest">
@@ -12,11 +8,11 @@
                     <xsd:sequence>
                         <xsd:element name="names" type="xsd:string"/>
                         <xsd:element name="lastName" type="xsd:string"/>
-                        <xsd:element name="documentType" type="xsd:string"/>
+                        <xsd:element name="documentType" type="xsd:int"/>
                         <xsd:element name="documentNumber" type="xsd:string"/>
                         <xsd:element name="dateOfBirth" type="xsd:string"/>
                         <xsd:element name="hiringDate" type="xsd:string"/>
-                        <xsd:element name="positionRoleType" type="xsd:string"/>
+                        <xsd:element name="positionRoleType" type="xsd:int"/>
                         <xsd:element name="salary" type="xsd:double"/>
                     </xsd:sequence>
                 </xsd:complexType>
@@ -25,7 +21,8 @@
             <xsd:element name="EmployeeResponse">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="result" type="xsd:string"/>
+                        <xsd:element name="resultCode" type="xsd:int"/>
+                        <xsd:element name="resultMsg" type="xsd:string"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>

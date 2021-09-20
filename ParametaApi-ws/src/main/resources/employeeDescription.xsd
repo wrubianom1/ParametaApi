@@ -9,11 +9,11 @@
             <xsd:sequence>
                 <xsd:element name="names" type="xsd:string"/>
                 <xsd:element name="lastName" type="xsd:string"/>
-                <xsd:element name="documentType" type="xsd:string"/>
+                <xsd:element name="documentType" type="xsd:int"/>
                 <xsd:element name="documentNumber" type="xsd:string"/>
                 <xsd:element name="dateOfBirth" type="xsd:string"/>
                 <xsd:element name="hiringDate" type="xsd:string"/>
-                <xsd:element name="positionRoleType" type="xsd:string"/>
+                <xsd:element name="positionRoleType" type="xsd:int"/>
                 <xsd:element name="salary" type="xsd:double"/>
             </xsd:sequence>
         </xsd:complexType>
@@ -22,7 +22,8 @@
     <xsd:element name="EmployeeResponse">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="result" type="xsd:string"/>
+                <xsd:element name="resultCode" type="xsd:int"/>
+                <xsd:element name="resultMsg" type="xsd:string"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

@@ -88,8 +88,9 @@
 
     <modules>
         <module>ParametaApi-model</module>
+        <module>ParametaApi-integration</module>
         <module>ParametaApi-core</module>
         <module>ParametaApi-web</module>
-        <module>ParametaApi-integration</module>
+        <module>ParametaApi-ws</module>
     </modules>
 </project>

@@ -24,8 +24,20 @@ public class Employee implements Serializable {
     @SequenceGenerator(name = "employee_id_employee_seq", sequenceName = "employee_id_employee_seq", allocationSize = 1)
     private Integer idEmployee;
 
-
     private String names;
 
+    private String lastName;
+
+    private Integer idDocumentType;
+
+    private String documentNumber;
+
+    private Date dateBirth;
+
+    private Date dateHiring;
+
+    private Integer idPositionRole;
+
+    private Double salary;
 
 }

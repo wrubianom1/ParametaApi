@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.7 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2021.09.18 a las 11:06:49 PM COT 
+// Generado el: 2021.09.19 a las 09:25:20 PM COT 
 //
 
 
@@ -27,11 +27,11 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="names" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="lastName" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="documentType" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="documentType" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="documentNumber" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="dateOfBirth" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="hiringDate" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="positionRoleType" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="positionRoleType" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="salary" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -59,16 +59,14 @@ public class EmployeeRequest {
     protected String names;
     @XmlElement(required = true)
     protected String lastName;
-    @XmlElement(required = true)
-    protected String documentType;
+    protected int documentType;
     @XmlElement(required = true)
     protected String documentNumber;
     @XmlElement(required = true)
     protected String dateOfBirth;
     @XmlElement(required = true)
     protected String hiringDate;
-    @XmlElement(required = true)
-    protected String positionRoleType;
+    protected int positionRoleType;
     protected double salary;
 
     /**
@@ -122,24 +120,16 @@ public class EmployeeRequest {
     /**
      * Obtiene el valor de la propiedad documentType.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
      */
-    public String getDocumentType() {
+    public int getDocumentType() {
         return documentType;
     }
 
     /**
      * Define el valor de la propiedad documentType.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
      */
-    public void setDocumentType(String value) {
+    public void setDocumentType(int value) {
         this.documentType = value;
     }
 
@@ -218,24 +208,16 @@ public class EmployeeRequest {
     /**
      * Obtiene el valor de la propiedad positionRoleType.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
      */
-    public String getPositionRoleType() {
+    public int getPositionRoleType() {
         return positionRoleType;
     }
 
     /**
      * Define el valor de la propiedad positionRoleType.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
      */
-    public void setPositionRoleType(String value) {
+    public void setPositionRoleType(int value) {
         this.positionRoleType = value;
     }
 

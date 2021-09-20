@@ -21,6 +21,9 @@ public class EmployeeConstants {
     public static final String APP_ERROR_MSG_CREATE_EMPLOYEE_CALL_ENDPOINT_EMP = "Ocurrio un error durante en el procesamiento de creación del empleado, contacte al administrador";
     public static final Integer APP_ERROR_CODE_CREATE_EMPLOYEE_CALL_ENDPOINT_EMP = 4;
 
+    public static final String APP_ERROR_MSG_CREATE_EMPLOYEE_LIMIT_MAYOR_AGE = "La persona a registrar no es mayor de edad";
+    public static final Integer APP_ERROR_CODE_CREATE_EMPLOYEE_LIMIT_MAYOR_AGE = 5;
+
 
     public static ErrorMessage extractErrorException(ParametaAppException ex, String URI) {
         ErrorMessage errorMessage = new ErrorMessage();
@@ -28,7 +31,10 @@ public class EmployeeConstants {
         errorMessage.setMessageCode(ex.getMessageCodeEx());
         errorMessage.setMessage(ex.getMessage());
         errorMessage.setLink(URI);
-        errorMessage.setHttpStatus(HttpStatus.resolve(ex.getErrorCodeEx()));
+        errorMessage.setHttpStatus(HttpStatus.resolve(ex.getHttpStatusEx()));
+        if (errorMessage.getHttpStatus() == null) {
+            errorMessage.setHttpStatus(HttpStatus.resolve(ex.getErrorCodeEx()));
+        }
         StringWriter errorStackTrace = new StringWriter();
         ex.printStackTrace(new PrintWriter(errorStackTrace));
         return errorMessage;
